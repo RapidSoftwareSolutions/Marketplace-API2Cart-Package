@@ -1,0 +1,814 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/API2Cart/functions?utm_source=RapidAPIGitHub_API2CartFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
+# API2Cart Package
+Connect your app with shopping carts. As many as you need. Via one integration.
+* Domain: [API2Cart](http://www.api2cart.com/)
+* Credentials: apiKey
+
+## How to get credentials: 
+0. Browse to [API2Cart website](https://api2cart.com)
+1. Register or log in
+2. Browse to [Stores page](https://app.api2cart.com) to get your apiKey
+
+
+
+## Custom datatypes: 
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]``` 
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+ 
+
+## API2Cart.addStore
+Add store to the account
+
+| Field            | Type       | Description
+|------------------|------------|----------
+| apiKey           | credentials| Your API key
+| cartId           | String     | Store’s identifier which you can get from cart_list method
+| storeUrl         | String     | A web address of a store that you would like to connect to API2Cart
+| bridgeUrl        | String     | This parameter allows to set up store with custom bridge url
+| storeRoot        | String     | Absolute path to the store root directory 
+| storeKey         | String     | Set this parameter if bridge is already uploaded to store
+| validateVersion  | Select     | Specify if api2cart should validate cart version
+| verify           | Select     | Enables or disables cart's verification
+| ftpHost          | String     | FTP connection host
+| ftpUser          | String     | FTP user
+| ftpPassword      | String     | FTP password
+| ftpPort          | String     | FTP port
+| ftpStoreDir      | String     | FTP Store dir
+| eliteApiKey      | String     | Shopping Cart Elite API Key
+| adminAccount     | String     | It's a BigCommerce account for which API is enabled
+| apiPath          | String     | BigCommerce API URL
+| bigcommerceApiKey| String     | BigCommerce API Key
+| clientId         | String     | Client ID of the requesting app.
+| accessToken      | String     | Access token authorizing the app to access resources on behalf of a user
+| apiPassword      | String     | Shopify API Password
+| encryptedPassword| String     | Volusion API Password
+| login            | String     | It's a Volusion account for which API is enabled
+| apiUser          | String     | It's a AspDotNetStorefront account for which API is available
+| apiPass          | String     | AspDotNetStorefront API Password
+| userName         | String     | MobiCart User Name
+| accessKey        | String     | Shopping Cart Elite Access Key
+| apiSecretKey     | String     | Shopping Cart Elite API Secret Key
+| privateKey       | String     | 3DCart Application Private Key
+| appToken         | String     | 3DCart Token from Application
+| etsyKeystring    | String     | Etsy keystring
+| etsySharedSecret | String     | Etsy shared secret
+| tokenSecret      | String     | Secret token authorizing the app to access resources on behalf of a user
+| ebayClientId     | String     | Application ID (AppID)
+| ebayClientSecret | String     | Shared Secret from eBay application
+| ebayRuname       | String     | The RuName value that eBay assigns to your application.
+| ebayAccessToken  | String     | Used to authenticate API requests.
+| ebayRefreshToken | String     | Used to renew the access token.
+| ebayEnvironment  | String     | Ebay environment
+| dwClientId       | String     | Demandware client id
+| dwApiPass        | String     | Demandware api password
+
+## API2Cart.validateCart
+Check store availability, bridge connection for the downloadable carts etc
+
+| Field          | Type       | Description
+|----------------|------------|----------
+| apiKey         | credentials| Your API key
+| storeKey       | String     | API2Cart store key
+| validateVersion| Select     | Specify if api2cart should validate cart version
+
+## API2Cart.listCarts
+Get list of supported carts
+
+| Field | Type       | Description
+|-------|------------|----------
+| apiKey| credentials| Your API key
+
+## API2Cart.getCartBridge
+Get bridge key and store key
+
+| Field | Type       | Description
+|-------|------------|----------
+| apiKey| credentials| Your API key
+
+## API2Cart.deleteCart
+Remove store from API2Cart
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+
+## API2Cart.disconnectCart
+Disconnect with the store and clear store session data.
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | API2Cart store key
+| deleteBridge| Select     | Identifies if there is a necessity to delete bridge
+
+## API2Cart.listCartMethods
+Get list of cart methods
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+
+## API2Cart.downloadBridge
+Download bridge for store
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+
+## API2Cart.listCartConfigs
+Get list of cart configs
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| params  | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
+## API2Cart.getCartInfo
+Get list of cart configs
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| params  | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| storeId | String     | Store Id
+
+## API2Cart.updateCartConfig
+Use this API method to update custom data in client database
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | API2Cart store key
+| customFields| String     | This parameter sets the list of params to the shopping cart.
+| storeId     | String     | Store Id
+
+## API2Cart.listCartPlugins
+Get list of installed plugins
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| start   | Number     | This parameter sets the number from which you want to get entities
+| count   | Number     | This parameter sets the entity amount that has to be retrieved
+| storeId | String     | Store Id
+
+## API2Cart.countCartCoupons
+Get cart coupons count
+
+| Field        | Type       | Description
+|--------------|------------|----------
+| apiKey       | credentials| Your API key
+| storeKey     | String     | API2Cart store key
+| dateStartFrom| DatePicker | Filter entity by date_start (greater or equal)
+| dateStartTo  | DatePicker | Filter entity by date_start (less or equal)
+| dateEndFrom  | DatePicker | Filter entity by date_end (greater or equal)
+| dateEndTo    | DatePicker | Filter entity by date_end (less or equal)
+| storeId      | String     | Store Id
+| avail        | Select     | Defines category's visibility status
+
+## API2Cart.countCartGiftcards
+Get gift cards count
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| storeId | String     | Store Id
+
+## API2Cart.listCartGiftcards
+Get gift cards list
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| storeId | String     | Store Id
+| start   | Number     | This parameter sets the number from which you want to get entities
+| count   | Number     | This parameter sets the entity amount that has to be retrieved
+| params  | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
+## API2Cart.listCartCoupons
+Get cart coupons list
+
+| Field        | Type       | Description
+|--------------|------------|----------
+| apiKey       | credentials| Your API key
+| storeKey     | String     | API2Cart store key
+| dateStartFrom| DatePicker | Filter entity by date_start (greater or equal)
+| dateStartTo  | DatePicker | Filter entity by date_start (less or equal)
+| dateEndFrom  | DatePicker | Filter entity by date_end (greater or equal)
+| dateEndTo    | DatePicker | Filter entity by date_end (less or equal)
+| storeId      | String     | Store Id
+| avail        | Select     | Defines category's visibility status
+| start        | Number     | This parameter sets the number from which you want to get entities
+| count        | Number     | This parameter sets the entity amount that has to be retrieved
+| langId       | String     | Language id
+| params       | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude      | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
+## API2Cart.addCartGiftcard
+Create new gift card
+
+| Field     | Type       | Description
+|-----------|------------|----------
+| apiKey    | credentials| Your API key
+| storeKey  | String     | API2Cart store key
+| amount    | String     | Defines the gift card amount value.
+| code      | String     | Gift card code
+| ownerEmail| String     | Gift card owner email
+
+## API2Cart.addCartCoupon
+Create new coupon
+
+| Field                  | Type       | Description
+|------------------------|------------|----------
+| apiKey                 | credentials| Your API key
+| storeKey               | String     | API2Cart store key
+| code                   | String     | Coupon code
+| actionType             | String     | Coupon discount type
+| actionApplyTo          | String     | Defines where discount should be applied
+| actionScope            | String     | Specify how discount should be applied.
+| actionAmount           | String     | Defines the discount amount value.
+| dateStart              | DatePicker | Defines when discount code will be available.
+| dateEnd                | DatePicker | Defines when discount code will be expired.
+| usageLimit             | Number     | Usage limit for coupon.
+| usageLimitPerCustomer  | Number     | Usage limit per customer.
+| actionConditionEntity  | String     | Defines entity for action condition.
+| actionConditionKey     | String     | Defines entity attribute code for action condition.
+| actionConditionOperator| String     | Defines condition operator
+| actionConditionValues  | List       | Defines condition attribute value/s. Can be comma separated string.
+
+## API2Cart.deleteCartCoupon
+Delete coupon
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| couponId| String     | Id of the coupon
+
+## API2Cart.clearCartCache
+Clear cache on store
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| cacheType| String     | Defines which cache should be cleared.
+
+## API2Cart.listProducts
+Get list of products from your store. Returns 4 products by default.
+
+| Field               | Type       | Description
+|---------------------|------------|----------
+| apiKey              | credentials| Your API key
+| storeKey            | String     | Set this parameter if bridge is already uploaded to store
+| start               | Number     | This parameter sets the number from which you want to get entities
+| count               | Number     | This parameter sets the entity amount that has to be retrieved
+| params              | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude             | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| categoryId          | String     | Retrieves products specified by category id
+| createdFrom         | DatePicker | Retrieve entities from their creation date
+| createdTo           | DatePicker | Retrieve entities to their creation date
+| modifiedFrom        | DatePicker | Retrieve entities from their modification date
+| modifiedTo          | DatePicker | Retrieve entities to their modification date
+| availView           | Select     | Specifies the set of visible/invisible products
+| availSale           | Select     | Specifies the set of available/not available products for sale
+| storeId             | String     | Store Id
+| langId              | String     | Language id
+| productIds          | List       | Retrieves products specified by product ids
+| productVariantParams| List       | Set this parameter in product to choose which entity fields product variants you want to retrieve
+| sinceId             | Number     | Retrieve products starting from the specified product id
+
+## API2Cart.countProducts
+Get list of products from your store. Returns 4 products by default.
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | Set this parameter if bridge is already uploaded to store
+| categoryId  | String     | Retrieves products specified by category id
+| createdFrom | DatePicker | Retrieve entities from their creation date
+| createdTo   | DatePicker | Retrieve entities to their creation date
+| modifiedFrom| DatePicker | Retrieve entities from their modification date
+| modifiedTo  | DatePicker | Retrieve entities to their modification date
+| availView   | Select     | Specifies the set of visible/invisible products
+| availSale   | Select     | Specifies the set of available/not available products for sale
+| storeId     | String     | Store Id
+| langId      | String     | Language id
+| productIds  | List       | Retrieves products specified by product ids
+
+## API2Cart.getProductInfo
+Get product info 
+
+| Field               | Type       | Description
+|---------------------|------------|----------
+| apiKey              | credentials| Your API key
+| storeKey            | String     | API2Cart store key
+| params              | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude             | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| productId           | String     | Product Id
+| storeId             | String     | Store Id
+| langId              | String     | Language id
+| productVariantParams| List       | Set this parameter in product to choose which entity fields product variants you want to retrieve
+
+## API2Cart.findProduct
+Search product in store catalog. 
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| findValue  | String     | Entity search that is specified by some value
+| findWhere  | List       | Entity search that is specified by list of unique fields
+| find_params| List       | Entity search that is specified by list of parameters
+| findWhat   | String     | Parameter's value specifies the entity that has to be found
+
+## API2Cart.listProductFields
+Search product in store catalog. 
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+
+## API2Cart.addProduct
+Add product to store catalog. 
+
+| Field             | Type       | Description
+|-------------------|------------|----------
+| apiKey            | credentials| Your API key
+| storeKey          | String     | API2Cart store key
+| name              | String     | Defines product's name that has to be added
+| model             | String     | Defines product's model that has to be added
+| price             | String     | Defines product's price that has to be added
+| description       | String     | Defines product's description that has to be added
+| sku               | String     | Defines product's sku  that has to be added
+| specialPrice      | String     | Defines product's special price  that has to be added
+| spriceCreate      | DatePicker | Defines the date of special price creation
+| spriceModified    | DatePicker | Defines the date of special price modification
+| spriceExpire      | DatePicker | Defines the date of special price expiration
+| tierPrices        | String     | Defines product's tier prices
+| groupPrices       | String     | Defines product's group prices
+| availableForView  | Select     | Specifies the set of visible/invisible products for users
+| availableForSale  | Select     | Specifies the set of visible/invisible products for sale
+| weight            | String     | Defines product's weight
+| shortDescription  | String     | Defines product's short description
+| quantity          | String     | Defines product's quantity
+| downloadable      | Select     | Defines whether the product is downloadable
+| wholesalePrice    | String     | Defines product's wholesale price
+| createdAt         | DatePicker | Defines product's creation date
+| manufacturer      | String     | Defines product's manufacturer
+| categoriesIds     | List       | Defines product categories id
+| taxClassId        | String     | Defines product's tax class id
+| type              | String     | Defines product's type
+| metaTitle         | String     | Defines product's meta title
+| metaKeywords      | String     | Defines product's meta keywords
+| metaDescription   | String     | Defines product's meta description
+| url               | String     | Defines product's url
+| langId            | Number     | Defines product's lang id
+| viewedCount       | Number     | Specifies the number of product's reviews
+| orderedCount      | Number     | Specifies the number of product's orders
+| attributeSetName  | String     | Defines product’s attribute set name in Magento
+| attributeSetName  | String     | Defines product’s attribute name in Magento
+| shippingTemplateId| Number     | The numeric ID of the shipping template associated with the products in Etsy.
+| condition         | String     | The human-readable label for the condition (e.g., "New").
+| listingDuration   | String     | Describes the number of days the seller wants the listing to be active.
+| paymentMethods    | List       | Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item.
+| returnAccepted    | Select     | Indicates whether the seller allows the buyer to return the item.
+| shippingDetails   | Number     | The numeric ID of the shipping template associated with the products in Etsy.
+| paypalEmail       | String     | Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing.
+
+## API2Cart.updateProduct
+Update product in store catalog. 
+
+| Field           | Type       | Description
+|-----------------|------------|----------
+| apiKey          | credentials| Your API key
+| storeKey        | String     | API2Cart store key
+| id              | String     | ID of the product
+| name            | String     | Defines product's name that has to be added
+| model           | String     | Defines product's model that has to be added
+| price           | String     | Defines product's price that has to be added
+| description     | String     | Defines product's description that has to be added
+| sku             | String     | Defines product's sku  that has to be added
+| specialPrice    | String     | Defines product's special price  that has to be added
+| costPrice       | String     | Defines product's cost price  that has to be added
+| retailPrice     | String     | Defines product's retail price  that has to be added
+| weight          | String     | Defines product's weight
+| shortDescription| String     | Defines product's short description
+| quantity        | String     | Defines product's quantity
+| increaseQuantity| String     | Defines product's quantity
+| reduceQuantity  | String     | Defines the decrement changes in product quantity
+| increaseQuantity| String     | Defines the incremental changes in product quantity
+| metaTitle       | String     | Defines product's meta title
+| metaKeywords    | String     | Defines product's meta keywords
+| metaDescription | String     | Defines product's meta description
+| seoUrl          | String     | Defines product's seo url
+| langId          | Number     | Defines product's lang id
+| manageStock     | Select     | Defines inventory tracking for product
+| inStock         | Select     | Set stock status
+
+## API2Cart.addProductImage
+Add image to product
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | ID of the product
+| imageName| String     | Defines image's name
+| type     | List       | Defines image's types that are specified by list
+| url      | String     | Defines URL of the image that has to be added
+| label    | String     | Defines alternative text that has to be attached to the picture
+| mime     | String     | Mime type of the image
+| position | Number     | Defines image’s position in the list
+| image    | File       | Image
+
+## API2Cart.updateProductImage
+Update image of the product
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | ID of the product
+| imageId  | String     | ID of the image
+| imageName| String     | Defines image's name
+| type     | List       | Defines image's types that are specified by list
+| label    | String     | Defines alternative text that has to be attached to the picture
+| storeID  | String     | Store id
+| hidden   | Select     | Define is hide image
+
+## API2Cart.deleteProductImage
+Delete image of the product
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | ID of the product
+| imageId  | String     | ID of the image
+| storeID  | String     | Store id
+
+## API2Cart.addProductOption
+Add product option from store
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | API2Cart store key
+| name        | String     | Defines option's name
+| type        | String     | Defines option's type that has to be added
+| productId   | String     | ID of the product
+| optionValues| String     | Defines option values that has to be added in Magento
+| description | String     | Defines option's description
+| avail       | Select     | Defines option's visibility status
+| sortOrder   | Number     | Sort number in the list
+| required    | Select     | Defines if the option is required
+
+## API2Cart.assignProductOption
+Assign option from produc
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | ID of the product
+| optionId | String     | ID of the option
+
+## API2Cart.addProductOptionValue
+Add product option item from option.
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| optionValue| String     | Value of the option
+| optionId   | String     | ID of the option
+| sortOrder  | Number     | Sort number in the list
+
+## API2Cart.assignProductOptionValue
+Assign product option item from option.
+
+| Field          | Type       | Description
+|----------------|------------|----------
+| apiKey         | credentials| Your API key
+| storeKey       | String     | API2Cart store key
+| productOptionId| String     | Defines product's option id where the value has to be assigned
+| optionValueId  | String     | Defines value id that has to be assigned
+
+## API2Cart.addProductVariant
+Add variant to product
+
+| Field           | Type       | Description
+|-----------------|------------|----------
+| apiKey          | credentials| Your API key
+| storeKey        | String     | API2Cart store key
+| productId       | String     | Id of the product
+| name            | String     | Defines variant's's name that has to be added
+| model           | String     | Defines variant's's model that has to be added
+| price           | String     | Defines variant's's price that has to be added
+| attributes      | String     | Defines variant's's attributes that has to be added
+| description     | String     | Defines variant's's description that has to be added
+| specialPrice    | String     | Defines variant's 's special price  that has to be added
+| spriceCreate    | DatePicker | Defines the date of special price creation
+| spriceModified  | DatePicker | Defines the date of special price modification
+| spriceExpire    | DatePicker | Defines the date of special price expiration
+| availableForView| Select     | Specifies the set of visible/invisible variants for users
+| availableForSale| Select     | Specifies the set of visible/invisible variants for sale
+| weight          | String     | Defines variants's weight
+| shortDescription| String     | Defines variants's short description
+| quantity        | String     | Defines variants's quantity
+| createdAt       | DatePicker | Defines variants's creation date
+| manufacturer    | String     | Defines variants's manufacturer
+| taxClassId      | String     | Defines variants's tax class id
+| metaTitle       | String     | Defines variants's meta title
+| metaKeywords    | String     | Defines variants's meta keywords
+| metaDescription | String     | Defines variants's meta description
+| url             | String     | Defines product's url
+
+## API2Cart.listProductVariants
+Get list of product cariants from your store
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | Set this parameter if bridge is already uploaded to store
+| start       | Number     | This parameter sets the number from which you want to get entities
+| count       | Number     | This parameter sets the entity amount that has to be retrieved
+| params      | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude     | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| categoryId  | String     | Retrieves products specified by category id
+| createdFrom | DatePicker | Retrieve entities from their creation date
+| createdTo   | DatePicker | Retrieve entities to their creation date
+| modifiedFrom| DatePicker | Retrieve entities from their modification date
+| modifiedTo  | DatePicker | Retrieve entities to their modification date
+| storeId     | String     | Store Id
+| productId   | String     | Retrieves products' variants specified by product id
+
+## API2Cart.countProductVariants
+Get count of product variants from your store
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | Set this parameter if bridge is already uploaded to store
+| categoryId  | String     | Retrieves products specified by category id
+| createdFrom | DatePicker | Retrieve entities from their creation date
+| createdTo   | DatePicker | Retrieve entities to their creation date
+| modifiedFrom| DatePicker | Retrieve entities from their modification date
+| modifiedTo  | DatePicker | Retrieve entities to their modification date
+| storeId     | String     | Store Id
+| productId   | String     | Retrieves products' variants specified by product id
+
+## API2Cart.updateProductVariant
+Update variant to product
+
+| Field           | Type       | Description
+|-----------------|------------|----------
+| apiKey          | credentials| Your API key
+| storeKey        | String     | API2Cart store key
+| id              | String     | Id of the variant
+| price           | String     | Defines variant's's price that has to be added
+| description     | String     | Defines variant's's description that has to be added
+| specialPrice    | String     | Defines variant's 's special price  that has to be added
+| shortDescription| String     | Defines variants's short description
+| quantity        | String     | Defines variants's quantity
+| metaTitle       | String     | Defines variants's meta title
+| metaKeywords    | String     | Defines variants's meta keywords
+| metaDescription | String     | Defines variants's meta description
+| sku             | String     | Defines variants's sku
+| visible         | String     | Set visibility status
+| status          | String     | Defines product variant's status
+
+## API2Cart.deleteProductVariant
+Delete variant to product
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| id      | String     | Id of the variant
+
+## API2Cart.addProductTax
+Add tax class and tax rate to store and assign to product
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | Id of the product
+| name     | String     | Defines tax class name where tax has to be added
+| taxRates | String     | Defines tax rates of specified tax classes
+
+## API2Cart.addProductManufacturer
+Add manufacturer to store and assign to product
+
+| Field       | Type       | Description
+|-------------|------------|----------
+| apiKey      | credentials| Your API key
+| storeKey    | String     | API2Cart store key
+| productId   | String     | Id of the product
+| manufacturer| String     | Defines product’s manufacturer's name
+
+## API2Cart.addCurrency
+Add currency and/or set default in store
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| iso3       | String     | Specifies standardized currency code
+| rate       | String     | Defines the numerical identifier against to the major currency
+| name       | String     | Defines currency's name
+| avail      | Select     | Specifies whether the currency is available
+| symbolLeft | String     | Defines the symbol that is located before the currency
+| symbolRight| String     | Defines the symbol that is located after the currency
+| default    | Select     | Specifies currency's default meaning
+
+## API2Cart.updateOptionValue
+Update product option item from option
+
+| Field        | Type       | Description
+|--------------|------------|----------
+| apiKey       | credentials| Your API key
+| storeKey     | String     | API2Cart store key
+| optionValueId| String     | Defines value id that has to be assigned
+| price        | String     | Defines new product option price
+| quantity     | String     | Defines new products' options quantity
+
+## API2Cart.deleteProduct
+Delete product
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| id      | String     | Id of the product
+
+## API2Cart.getProductVariantInfo
+Get variant info
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| id      | String     | Id of the variant
+| params  | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| storeId | String     | Store Id
+
+## API2Cart.listProductOptions
+Get list of options
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | Id of the product
+| params   | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude  | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| start    | Number     | This parameter sets the number from which you want to get entities
+| count    | Number     | This parameter sets the entity amount that has to be retrieved
+
+## API2Cart.listCurrency
+Get list of currencies
+
+| Field   | Type       | Description
+|---------|------------|----------
+| apiKey  | credentials| Your API key
+| storeKey| String     | API2Cart store key
+| params  | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| start   | Number     | This parameter sets the number from which you want to get entities
+| count   | Number     | This parameter sets the entity amount that has to be retrieved
+| default | Select     | Specifies currency's default meaning
+| avail   | Select     | Defines category's visibility status
+
+## API2Cart.listProductAttributes
+Get list of attributes
+
+| Field           | Type       | Description
+|-----------------|------------|----------
+| apiKey          | credentials| Your API key
+| storeKey        | String     | API2Cart store key
+| productId       | String     | Id of the product
+| params          | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude         | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+| start           | Number     | This parameter sets the number from which you want to get entities
+| count           | Number     | This parameter sets the entity amount that has to be retrieved
+| sortBy          | String     | Set field to sort by
+| sortDirection   | String     | Set sorting direction
+| langId          | String     | Language id
+| storeId         | String     | Store Id
+| attributeId     | String     | Retrieves info for specified attributeId
+| attributeGroupId| String     | Filter by attributeGroupId
+| setName         | String     | Retrieves attributes specified by set_name in Magento
+
+## API2Cart.addProductPrice
+Add some prices to the produc
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| productId  | String     | Id of the product
+| groupPrices| String     | Defines product's group prices
+
+## API2Cart.updateProductPrice
+Update product price
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| productId  | String     | Id of the product
+| groupPrices| String     | Defines product's group prices
+
+## API2Cart.deleteProductPrice
+Delete product price
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| productId  | String     | Id of the product
+| groupPrices| String     | Defines product's group prices
+
+## API2Cart.addProductVariantPrice
+Add some prices to the product variant
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| variantId  | String     | Id of the variant
+| groupPrices| String     | Defines product's group prices
+
+## API2Cart.updateProductVariantPrice
+Update some prices of the product variant
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| variantId  | String     | Id of the variant
+| groupPrices| String     | Defines product's group prices
+
+## API2Cart.deleteProductVariantPrice
+Delete some prices of the product variant
+
+| Field      | Type       | Description
+|------------|------------|----------
+| apiKey     | credentials| Your API key
+| storeKey   | String     | API2Cart store key
+| variantId  | String     | Id of the variant
+| groupPrices| String     | Defines product's group prices
+
+## API2Cart.setProductAttributeValue
+Set attribute value to product.
+
+| Field           | Type       | Description
+|-----------------|------------|----------
+| apiKey          | credentials| Your API key
+| storeKey        | String     | API2Cart store key
+| productId       | String     | Id of the product
+| attributeId     | String     | Filter by attributeId
+| attributeGroupId| String     | Filter by attributeGroupId
+| attributeName   | String     | Define attribute name
+| value           | String     | Define attribute value
+| valueId         | String     | Define attribute value id
+| langId          | String     | Language id
+| storeId         | String     | Store Id
+
+## API2Cart.listProductChildItems
+Get child items list of specific product
+
+| Field    | Type       | Description
+|----------|------------|----------
+| apiKey   | credentials| Your API key
+| storeKey | String     | API2Cart store key
+| productId| String     | Id of the product
+| langId   | String     | Language id
+| storeId  | String     | Store Id
+| start    | Number     | This parameter sets the number from which you want to get entities
+| count    | Number     | This parameter sets the entity amount that has to be retrieved
+| params   | String     | Set this parameter in order to choose which entity fields you want to retrieve
+| exclude  | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
