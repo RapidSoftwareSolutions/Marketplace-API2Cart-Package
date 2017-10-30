@@ -23,7 +23,7 @@ $app->post('/api/API2Cart/countCartGiftcards', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "https://api.api2cart.com/v1.0/cart.gitcard.count.json";
+    $query_str = "https://api.api2cart.com/v1.0/cart.giftcard.count.json";
 
     
 

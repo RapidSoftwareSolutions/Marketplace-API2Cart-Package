@@ -12,7 +12,7 @@ $app->post('/api/API2Cart/assignCategory', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','categoryId'=>'category_id','categoryId'=>'product_id'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','categoryId'=>'category_id','productId'=>'product_id'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['product_id','category_id','api_key','store_key']

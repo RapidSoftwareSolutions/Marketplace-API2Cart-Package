@@ -2844,7 +2844,7 @@
                     }
                 },
                 {
-                    "name": "attributeSetName",
+                    "name": "attributeName",
                     "type": "String",
                     "info": "Defines product\u2019s attribute name in Magento",
                     "required": true,
@@ -7076,7 +7076,7 @@
                     }
                 },
                 {
-                    "name": "categoryId",
+                    "name": "productId",
                     "type": "String",
                     "info": "Id of the category",
                     "required": true,
@@ -7143,7 +7143,7 @@
                     }
                 },
                 {
-                    "name": "categoryId",
+                    "name": "productId",
                     "type": "String",
                     "info": "Id of the category",
                     "required": true,
@@ -8160,15 +8160,7 @@
                         "name": "bill_last_name"
                     }
                 },
-                {
-                    "name": "billLastName",
-                    "type": "String",
-                    "info": "Specifies billing last name",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "bill_last_name"
-                    }
-                },
+
                 {
                     "name": "billAddress1",
                     "type": "String",
