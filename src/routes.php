@@ -1,5 +1,6 @@
 <?php
 $routes = [
+'webhookEvent',
     'metadata',
     'addStore',
     'validateCart',

@@ -4,7 +4,7 @@ $app->post('/api/API2Cart/listOrdersShipments', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey', "orderId"]);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/API2Cart/listOrdersShipments', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key', 'orderId'=> 'order_ID'];
     $optionalParams = ['start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude','createdFrom'=>'created_from','createdTo'=>'created_to'];
     $bodyParams = [
        'query' => ['created_from','created_to','exclude','params','count','start','api_key','store_key']

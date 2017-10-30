@@ -9056,6 +9056,15 @@
                     }
                 },
                 {
+                    "name": "orderId",
+                    "type": "String",
+                    "info": "Id of the order",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "order_id"
+                    }
+                },
+                {
                     "name": "start",
                     "type": "Number",
                     "info": "This parameter sets the number from which you want to get entities",
@@ -9117,6 +9126,7 @@
                     {
                         "type": "query",
                         "parameters": [
+                            "order_id",
                             "created_from",
                             "created_to",
                             "exclude",
