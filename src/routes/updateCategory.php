@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/updateCategory', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','categoryId'=>'categoryId','description'=>'description'];
-    $optionalParams = ['name'=>'name','storesIds'=>'storesIds','parentId'=>'parentId','avail'=>'avail','sortOrder'=>'sortOrder','createdTime'=>'createdTime','modifiedTime'=>'modifiedTime','metaTitle'=>'metaTitle','metaKeywords'=>'metaKeywords','metaDescription'=>'metaDescription','seoUrl'=>'seoUrl'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','categoryId'=>'id','description'=>'description'];
+    $optionalParams = ['name'=>'name','storesIds'=>'stores_ids','parentId'=>'parent_id','avail'=>'avail','sortOrder'=>'sort_order','createdTime'=>'created_time','modifiedTime'=>'modified_time','metaTitle'=>'meta_title','metaKeywords'=>'meta_keywords','metaDescription'=>'meta_description','seoUrl'=>'seo_url'];
     $bodyParams = [
        'query' => ['seo_url','meta_description','meta_keywords','meta_title','description','modified_time','created_time','sort_order','avail','parent_id','stores_ids','id','name','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/updateCategory', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['stores_ids'] = \Models\Params::toString($data['stores_ids'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/category.update.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/updateCategory', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

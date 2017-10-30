@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/listProductAttributes', function ($request, $response)
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','productId'=>'productId'];
-    $optionalParams = ['params'=>'params','exclude'=>'exclude','start'=>'start','count'=>'count','sortBy'=>'sortBy','sortDirection'=>'sortDirection','langId'=>'langId','storeId'=>'storeId','attributeId'=>'attributeId','attributeGroupId'=>'attributeGroupId','setName'=>'setName'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id'];
+    $optionalParams = ['params'=>'params','exclude'=>'exclude','start'=>'start','count'=>'count','sortBy'=>'sort_by','sortDirection'=>'sort_direction','langId'=>'lang_id','storeId'=>'store_id','attributeId'=>'attribute_id','attributeGroupId'=>'attribute_group_id','setName'=>'set_name'];
     $bodyParams = [
        'query' => ['set_name','attribute_group_id','attribute_id','store_id','lang_id','sort_direction','sort_by','start','count','exclude','params','product_id','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/listProductAttributes', function ($request, $response)
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

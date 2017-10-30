@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/deleteProductVariantPrice', function ($request, $respo
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','variantId'=>'variantId'];
-    $optionalParams = ['groupPrices'=>'groupPrices'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','variantId'=>'id'];
+    $optionalParams = ['groupPrices'=>'group_prices'];
     $bodyParams = [
        'query' => ['group_prices','id','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/deleteProductVariantPrice', function ($request, $respo
         $resp = $client->delete($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

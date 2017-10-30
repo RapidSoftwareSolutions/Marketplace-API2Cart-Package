@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addOrderShipment', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','orderId'=>'orderId'];
-    $optionalParams = ['shipmentProvider'=>'shipmentProvider','items'=>'items','exclude'=>'exclude'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','orderId'=>'order_id'];
+    $optionalParams = ['shipmentProvider'=>'shipment_provider','items'=>'items','exclude'=>'exclude'];
     $bodyParams = [
        'query' => ['items','shipment_provider','order_id','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/addOrderShipment', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['items'] = \Models\Params::toString($data['items'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/order.shipment.add.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/addOrderShipment', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

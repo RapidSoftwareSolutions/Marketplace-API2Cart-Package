@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/listCartCoupons', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['dateStartFrom'=>'dateStartFrom','dateStartTo'=>'dateStartTo','dateEndFrom'=>'dateEndFrom','dateEndTo'=>'dateEndTo','storeId'=>'storeId','avail'=>'avail','start'=>'start','count'=>'count','langId'=>'langId','params'=>'params','exclude'=>'exclude'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['dateStartFrom'=>'date_start_from','dateStartTo'=>'date_start_to','dateEndFrom'=>'date_end_from','dateEndTo'=>'date_end_to','storeId'=>'store_id','avail'=>'avail','start'=>'start','count'=>'count','langId'=>'lang_id','params'=>'params','exclude'=>'exclude'];
     $bodyParams = [
        'query' => ['store_id','api_key','store_key','date_start_from','date_start_to','date_end_from','date_end_to','avail','start','count','lang_id','params','exclude']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/listCartCoupons', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

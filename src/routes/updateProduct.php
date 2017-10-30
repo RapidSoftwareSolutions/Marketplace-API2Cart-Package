@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/updateProduct', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','id'=>'id'];
-    $optionalParams = ['name'=>'name','model'=>'model','price'=>'price','description'=>'description','sku'=>'sku','specialPrice'=>'specialPrice','costPrice'=>'costPrice','retailPrice'=>'retailPrice','weight'=>'weight','shortDescription'=>'shortDescription','quantity'=>'quantity','increaseQuantity'=>'increaseQuantity','reduceQuantity'=>'reduceQuantity','increaseQuantity'=>'increaseQuantity','metaTitle'=>'metaTitle','metaKeywords'=>'metaKeywords','metaDescription'=>'metaDescription','seoUrl'=>'seoUrl','langId'=>'langId','manageStock'=>'manageStock','inStock'=>'inStock'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','id'=>'id'];
+    $optionalParams = ['name'=>'name','model'=>'model','price'=>'price','description'=>'description','sku'=>'sku','specialPrice'=>'special_price','costPrice'=>'cost_price','retailPrice'=>'retail_price','weight'=>'weight','shortDescription'=>'short_description','quantity'=>'quantity','increaseQuantity'=>'increase_quantity','reduceQuantity'=>'reduce_quantity','increaseQuantity'=>'increase_quantity','metaTitle'=>'meta_title','metaKeywords'=>'meta_keywords','metaDescription'=>'meta_description','seoUrl'=>'seo_url','langId'=>'lang_id','manageStock'=>'manage_stock','inStock'=>'in_stock'];
     $bodyParams = [
        'query' => ['in_stock','manage_stock','retail_price','cost_price','id','lang_id','seo_url','meta_description','meta_keywords','meta_title','special_price','sku','price','description','model','name','api_key','store_key','increase_quantity','reduce_quantity']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/updateProduct', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

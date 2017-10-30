@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/listAttributeGroups', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude','attributeSetId'=>'attributeSetId'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude','attributeSetId'=>'attribute_set_id'];
     $bodyParams = [
        'query' => ['exclude','params','count','start','api_key','store_key','attribute_set_id']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/listAttributeGroups', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

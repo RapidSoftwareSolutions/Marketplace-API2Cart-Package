@@ -12,7 +12,7 @@ $app->post('/api/API2Cart/updateWebhook', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','webhookId'=>'webhookId'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','webhookId'=>'id'];
     $optionalParams = ['callback'=>'callback','label'=>'label','fields'=>'fields','active'=>'active'];
     $bodyParams = [
        'query' => ['fields','label','callback','active','api_key','store_key','id']
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/updateWebhook', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['fields'] = \Models\Params::toString($data['fields'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/webhook.update.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/updateWebhook', function ($request, $response) {
         $resp = $client->put($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

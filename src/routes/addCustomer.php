@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addCustomer', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','email'=>'email','firstName'=>'firstName','lastName'=>'lastName'];
-    $optionalParams = ['password'=>'password','group'=>'group','createdTime'=>'createdTime','modifiedTime'=>'modifiedTime','login'=>'login','lastLogin'=>'lastLogin','birthDay'=>'birthDay','status'=>'status','newsLetterSubscription'=>'newsLetterSubscription','gender'=>'gender','website'=>'website','fax'=>'fax','company'=>'company','phone'=>'phone','addressBookType'=>'addressBookType','addressBookFirstName'=>'addressBookFirstName','addressBookLastName'=>'addressBookLastName','addressBookCompany'=>'addressBookCompany','addressBookFax'=>'addressBookFax','addressBookPhone'=>'addressBookPhone','addressBookPhone'=>'addressBookPhone','addressBookWebsite'=>'addressBookWebsite','addressBookAddress1'=>'addressBookAddress1','addressBookAddress2'=>'addressBookAddress2','addressBookCity'=>'addressBookCity','addressBookCountry'=>'addressBookCountry','addressBookState'=>'addressBookState','addressBookPostcode'=>'addressBookPostcode','addressBookGender'=>'addressBookGender','addressBookRegion'=>'addressBookRegion','addressBookDefault'=>'addressBookDefault'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','email'=>'email','firstName'=>'first_name','lastName'=>'last_name'];
+    $optionalParams = ['password'=>'password','group'=>'group','createdTime'=>'created_time','modifiedTime'=>'modified_time','login'=>'login','lastLogin'=>'last_login','birthDay'=>'birth_day','status'=>'status','newsLetterSubscription'=>'news_letter_subscription','gender'=>'gender','website'=>'website','fax'=>'fax','company'=>'company','phone'=>'phone','addressBookType'=>'address_book_type_{x}','addressBookFirstName'=>'address_book_first_name_{x}','addressBookLastName'=>'address_book_last_name_{x}','addressBookCompany'=>'address_book_company_{x}','addressBookFax'=>'address_book_fax_{x}','addressBookPhone'=>'address_book_phone_{x}','addressBookPhone'=>'address_book_phone_{x}','addressBookWebsite'=>'address_book_website_{x}','addressBookAddress1'=>'address_book_address1_{x}','addressBookAddress2'=>'address_book_address2_{x}','addressBookCity'=>'address_book_city_{x}','addressBookCountry'=>'address_book_country_{x}','addressBookState'=>'address_book_state_{x}','addressBookPostcode'=>'address_book_postcode_{x}','addressBookGender'=>'address_book_gender_{x}','addressBookRegion'=>'address_book_region_{x}','addressBookDefault'=>'address_book_default_{x}'];
     $bodyParams = [
        'query' => ['address_book_default_{x}','address_book_region_{x}','address_book_gender_{x}','address_book_postcode_{x}','address_book_state_{x}','address_book_country_{x}','address_book_city_{x}','address_book_address2_{x}','address_book_address1_{x}','address_book_website_{x}','address_book_phone_{x}','address_book_fax_{x}','address_book_company_{x}','address_book_last_name_{x}','address_book_first_name_{x}','address_book_type_{x}','phone','company','fax','website','gender','news_letter_subscription','status','birth_day','last_login','login','modified_time','created_time','group','password','last_name','first_name','email','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/addCustomer', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

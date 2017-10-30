@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addStore', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','cartId'=>'cartId','storeUrl'=>'storeUrl','eliteApiKey'=>'eliteApiKey','adminAccount'=>'adminAccount','apiPath'=>'apiPath','bigcommerceApiKey'=>'bigcommerceApiKey','clientId'=>'clientId','accessToken'=>'accessToken','apiPassword'=>'apiPassword','encryptedPassword'=>'encryptedPassword','login'=>'login','apiUser'=>'apiUser','apiPass'=>'apiPass','userName'=>'userName','accessKey'=>'accessKey','apiSecretKey'=>'apiSecretKey','appToken'=>'appToken','etsyKeystring'=>'etsyKeystring','etsySharedSecret'=>'etsySharedSecret','tokenSecret'=>'tokenSecret','ebayClientId'=>'ebayClientId','ebayClientSecret'=>'ebayClientSecret','ebayRuname'=>'ebayRuname','ebayAccessToken'=>'ebayAccessToken','ebayRefreshToken'=>'ebayRefreshToken','dwClientId'=>'dwClientId','dwApiPass'=>'dwApiPass'];
-    $optionalParams = ['bridgeUrl'=>'bridgeUrl','storeRoot'=>'storeRoot','storeKey'=>'storeKey','validateVersion'=>'validateVersion','verify'=>'verify','ftpHost'=>'ftpHost','ftpUser'=>'ftpUser','ftpPassword'=>'ftpPassword','ftpPort'=>'ftpPort','ftpStoreDir'=>'ftpStoreDir','privateKey'=>'privateKey','ebayEnvironment'=>'ebayEnvironment'];
+    $requiredParams = ['apiKey'=>'api_key','cartId'=>'cart_id','storeUrl'=>'store_url','eliteApiKey'=>'apiKey','adminAccount'=>'AdminAccount','apiPath'=>'ApiPath','bigcommerceApiKey'=>'ApiKey','clientId'=>'client_id','accessToken'=>'accessToken','apiPassword'=>'apiPassword','encryptedPassword'=>'EncryptedPassword','login'=>'Login','apiUser'=>'apiUser','apiPass'=>'apiPass','userName'=>'userName','accessKey'=>'accessKey','apiSecretKey'=>'apiSecretKey','appToken'=>'appToken','etsyKeystring'=>'etsy_keystring','etsySharedSecret'=>'etsy_shared_secret','tokenSecret'=>'tokenSecret','ebayClientId'=>'ebay_client_id','ebayClientSecret'=>'ebay_client_secret','ebayRuname'=>'ebay_runame','ebayAccessToken'=>'ebay_access_token','ebayRefreshToken'=>'ebay_refresh_token','dwClientId'=>'dw_client_id','dwApiPass'=>'dw_api_pass'];
+    $optionalParams = ['bridgeUrl'=>'bridge_url','storeRoot'=>'store_root','storeKey'=>'store_key','validateVersion'=>'validate_version','verify'=>'verify','ftpHost'=>'ftp_host','ftpUser'=>'ftp_user','ftpPassword'=>'ftp_password','ftpPort'=>'ftp_port','ftpStoreDir'=>'ftp_store_dir','privateKey'=>'privateKey','ebayEnvironment'=>'ebay_environment'];
     $bodyParams = [
        'query' => ['dw_api_pass','dw_client_id','ebay_environment','ebay_refresh_token','ebay_access_token','ebay_runame','ebay_client_secret','ebay_client_id','tokenSecret','etsy_shared_secret','etsy_keystring','appToken','privateKey','apiSecretKey','accessKey','userName','apiPass','apiUser','Login','EncryptedPassword','apiPassword','accessToken','client_id','ApiKey','ApiPath','AdminAccount','apiKey','ftp_store_dir','ftp_port','ftp_password','ftp_user','ftp_host','verify','validate_version','store_key','store_root','api_key','cart_id','store_url','bridge_url']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/addStore', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

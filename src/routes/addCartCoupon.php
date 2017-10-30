@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addCartCoupon', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','code'=>'code','actionType'=>'actionType','actionApplyTo'=>'actionApplyTo','actionScope'=>'actionScope','actionAmount'=>'actionAmount'];
-    $optionalParams = ['dateStart'=>'dateStart','dateEnd'=>'dateEnd','usageLimit'=>'usageLimit','usageLimitPerCustomer'=>'usageLimitPerCustomer','actionConditionEntity'=>'actionConditionEntity','actionConditionKey'=>'actionConditionKey','actionConditionOperator'=>'actionConditionOperator','actionConditionValues'=>'actionConditionValues'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','code'=>'code','actionType'=>'action_type','actionApplyTo'=>'action_apply_to','actionScope'=>'action_scope','actionAmount'=>'action_amount'];
+    $optionalParams = ['dateStart'=>'date_start','dateEnd'=>'date_end','usageLimit'=>'usage_limit','usageLimitPerCustomer'=>'usage_limit_per_customer','actionConditionEntity'=>'action_condition_entity','actionConditionKey'=>'action_condition_key','actionConditionOperator'=>'action_condition_operator','actionConditionValues'=>'action_condition_value'];
     $bodyParams = [
        'query' => ['action_condition_value','action_condition_operator','action_condition_key','action_condition_entity','usage_limit_per_customer','usage_limit','date_end','date_start','action_amount','action_scope','action_apply_to','action_type','code','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/addCartCoupon', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['action_condition_value'] = \Models\Params::toString($data['action_condition_value'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/cart.coupon.add.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/addCartCoupon', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

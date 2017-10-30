@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addProductOption', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','name'=>'name','type'=>'type'];
-    $optionalParams = ['productId'=>'productId','optionValues'=>'optionValues','description'=>'description','avail'=>'avail','sortOrder'=>'sortOrder','required'=>'required'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','name'=>'name','type'=>'type'];
+    $optionalParams = ['productId'=>'product_id','optionValues'=>'option_values','description'=>'description','avail'=>'avail','sortOrder'=>'sort_order','required'=>'required'];
     $bodyParams = [
        'query' => ['required','sort_order','avail','description','option_values','type','api_key','store_key','name','product_id']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/addProductOption', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

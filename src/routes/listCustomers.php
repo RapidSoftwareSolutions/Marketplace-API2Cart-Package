@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/listCustomers', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['createdTo'=>'createdTo','createdFrom'=>'createdFrom','modifiedTo'=>'modifiedTo','modifiedFrom'=>'modifiedFrom','storeId'=>'storeId','groupId'=>'groupId','customerListId'=>'customerListId','start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['createdTo'=>'created_to','createdFrom'=>'created_from','modifiedTo'=>'modified_to','modifiedFrom'=>'modified_from','storeId'=>'store_id','groupId'=>'group_id','customerListId'=>'customer_list_id','start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude'];
     $bodyParams = [
        'query' => ['customer_list_id','group_id','exclude','params','count','start','store_id','modified_from','modified_to','created_from','created_to','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/listCustomers', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

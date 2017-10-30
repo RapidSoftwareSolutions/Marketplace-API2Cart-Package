@@ -12,7 +12,7 @@ $app->post('/api/API2Cart/unassignAttributeFromGroup', function ($request, $resp
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','attributeId'=>'attributeId','groupId'=>'groupId'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','attributeId'=>'id','groupId'=>'group_id'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['api_key','store_key','id','group_id']
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/unassignAttributeFromGroup', function ($request, $resp
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

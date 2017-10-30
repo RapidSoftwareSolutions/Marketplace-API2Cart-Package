@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/findOrders', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['customerId'=>'customerId','customerEmail'=>'customerEmail','orderStatus'=>'orderStatus','createdTo'=>'createdTo','createdFrom'=>'createdFrom','modifiedTo'=>'modifiedTo','modifiedFrom'=>'modifiedFrom','start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['customerId'=>'customer_id','customerEmail'=>'customer_email','orderStatus'=>'order_status','createdTo'=>'created_to','createdFrom'=>'created_from','modifiedTo'=>'modified_to','modifiedFrom'=>'modified_from','start'=>'start','count'=>'count','params'=>'params','exclude'=>'exclude'];
     $bodyParams = [
        'query' => ['exclude','params','count','start','modified_from','modified_to','created_from','created_to','order_status','customer_email','customer_id','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/findOrders', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/listWebhooks', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['entity'=>'entity','action'=>'action','active'=>'active','start'=>'start','count'=>'count','params'=>'params','webhookIds'=>'webhookIds'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['entity'=>'entity','action'=>'action','active'=>'active','start'=>'start','count'=>'count','params'=>'params','webhookIds'=>'ids'];
     $bodyParams = [
        'query' => ['ids','params','count','start','active','action','entity','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/listWebhooks', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['ids'] = \Models\Params::toString($data['ids'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/webhook.list.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/listWebhooks', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

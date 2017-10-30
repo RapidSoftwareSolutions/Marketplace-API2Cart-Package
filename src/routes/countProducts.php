@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/countProducts', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['categoryId'=>'categoryId','createdFrom'=>'createdFrom','createdTo'=>'createdTo','modifiedFrom'=>'modifiedFrom','modifiedTo'=>'modifiedTo','availView'=>'availView','availSale'=>'availSale','storeId'=>'storeId','langId'=>'langId','productIds'=>'productIds'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['categoryId'=>'category_id','createdFrom'=>'created_from','createdTo'=>'created_to','modifiedFrom'=>'modified_from','modifiedTo'=>'modified_to','availView'=>'avail_view','availSale'=>'avail_sale','storeId'=>'store_id','langId'=>'lang_id','productIds'=>'product_ids'];
     $bodyParams = [
        'query' => ['product_ids','lang_id','store_id','avail_sale','avail_view','modified_to','modified_from','created_to','created_from','category_id','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/countProducts', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['product_ids'] = \Models\Params::toString($data['product_ids'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/product.count.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/countProducts', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

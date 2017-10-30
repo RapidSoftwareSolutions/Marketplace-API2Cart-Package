@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/countOrders', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['customerId'=>'customerId','customerEmail'=>'customerEmail','orderStatus'=>'orderStatus','createdTo'=>'createdTo','createdFrom'=>'createdFrom','modifiedTo'=>'modifiedTo','modifiedFrom'=>'modifiedFrom','storeId'=>'storeId','orderIds'=>'orderIds'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['customerId'=>'customer_id','customerEmail'=>'customer_email','orderStatus'=>'order_status','createdTo'=>'created_to','createdFrom'=>'created_from','modifiedTo'=>'modified_to','modifiedFrom'=>'modified_from','storeId'=>'store_id','orderIds'=>'order_ids'];
     $bodyParams = [
        'query' => ['order_ids','store_id','modified_from','modified_to','created_from','created_to','order_status','customer_email','customer_id','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/countOrders', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['order_ids'] = \Models\Params::toString($data['order_ids'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/order.count.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/countOrders', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

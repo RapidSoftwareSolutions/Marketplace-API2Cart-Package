@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/updateImageForCategory', function ($request, $response
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','categoryId'=>'categoryId'];
-    $optionalParams = ['imageName'=>'imageName','label'=>'label','type'=>'type','position'=>'position','storeId'=>'storeId'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','categoryId'=>'category_id'];
+    $optionalParams = ['imageName'=>'image_name','label'=>'label','type'=>'type','position'=>'position','storeId'=>'store_id'];
     $bodyParams = [
        'query' => ['store_id','position','type','label','image_name','category_id','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/updateImageForCategory', function ($request, $response
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['type'] = \Models\Params::toString($data['type'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/category.image.update.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/updateImageForCategory', function ($request, $response
         $resp = $client->put($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

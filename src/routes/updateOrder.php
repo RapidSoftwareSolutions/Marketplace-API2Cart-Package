@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/updateOrder', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','orderId'=>'orderId'];
-    $optionalParams = ['storeId'=>'storeId','orderStatus'=>'orderStatus','comment'=>'comment','dateModified'=>'dateModified','dateFinished'=>'dateFinished','financialStatus'=>'financialStatus'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','orderId'=>'order_id'];
+    $optionalParams = ['storeId'=>'store_id','orderStatus'=>'order_status','comment'=>'comment','dateModified'=>'date_modified','dateFinished'=>'date_finished','financialStatus'=>'financial_status'];
     $bodyParams = [
        'query' => ['financial_status','date_finished','date_modified','comment','order_status','store_id','api_key','store_key','order_id']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/updateOrder', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

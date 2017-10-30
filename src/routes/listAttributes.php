@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/listAttributes', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
-    $optionalParams = ['start'=>'start','count'=>'count','type'=>'type','attributeIds'=>'attributeIds','storeId'=>'storeId','langId'=>'langId','params'=>'params','exclude'=>'exclude','visible'=>'visible','required'=>'required','system'=>'system'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['start'=>'start','count'=>'count','type'=>'type','attributeIds'=>'attribute_ids','storeId'=>'store_id','langId'=>'lang_id','params'=>'params','exclude'=>'exclude','visible'=>'visible','required'=>'required','system'=>'system'];
     $bodyParams = [
        'query' => ['system','required','visible','exclude','params','lang_id','store_id','attribute_ids','type','count','start','api_key','store_key']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/listAttributes', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['attribute_ids'] = \Models\Params::toString($data['attribute_ids'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/attribute.list.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/listAttributes', function ($request, $response) {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

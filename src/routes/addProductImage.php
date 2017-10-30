@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addProductImage', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','productId'=>'productId','type'=>'type','url'=>'url'];
-    $optionalParams = ['imageName'=>'imageName','label'=>'label','mime'=>'mime','position'=>'position','image'=>'image'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','type'=>'type','url'=>'url'];
+    $optionalParams = ['imageName'=>'image_name','label'=>'label','mime'=>'mime','position'=>'position','image'=>'content'];
     $bodyParams = [
        'query' => ['content','position','mime','label','url','type','image_name','api_key','store_key','product_id']
     ];
@@ -21,6 +21,7 @@ $app->post('/api/API2Cart/addProductImage', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     
+    $data['type'] = \Models\Params::toString($data['type'], ','); 
 
     $client = $this->httpClient;
     $query_str = "https://api.api2cart.com/v1.0/product.image.add.json";
@@ -35,7 +36,7 @@ $app->post('/api/API2Cart/addProductImage', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

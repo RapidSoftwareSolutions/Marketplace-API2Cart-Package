@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addProductVariant', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','productId'=>'productId','name'=>'name','model'=>'model','attributes'=>'attributes'];
-    $optionalParams = ['price'=>'price','description'=>'description','specialPrice'=>'specialPrice','spriceCreate'=>'spriceCreate','spriceModified'=>'spriceModified','spriceExpire'=>'spriceExpire','availableForView'=>'availableForView','availableForSale'=>'availableForSale','weight'=>'weight','shortDescription'=>'shortDescription','quantity'=>'quantity','createdAt'=>'createdAt','manufacturer'=>'manufacturer','taxClassId'=>'taxClassId','metaTitle'=>'metaTitle','metaKeywords'=>'metaKeywords','metaDescription'=>'metaDescription','url'=>'url'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','name'=>'name','model'=>'model','attributes'=>'attributes'];
+    $optionalParams = ['price'=>'price','description'=>'description','specialPrice'=>'special_price','spriceCreate'=>'sprice_create','spriceModified'=>'sprice_modified','spriceExpire'=>'sprice_expire','availableForView'=>'available_for_view','availableForSale'=>'available_for_sale','weight'=>'weight','shortDescription'=>'short_description','quantity'=>'quantity','createdAt'=>'created_at','manufacturer'=>'manufacturer','taxClassId'=>'tax_class_id','metaTitle'=>'meta_title','metaKeywords'=>'meta_keywords','metaDescription'=>'meta_description','url'=>'url'];
     $bodyParams = [
        'query' => ['url','meta_description','meta_keywords','meta_title','tax_class_id','manufacturer','created_at','quantity','short_description','weight','available_for_sale','available_for_view','sprice_expire','sprice_modified','sprice_create','special_price','price','description','model','name','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/addProductVariant', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

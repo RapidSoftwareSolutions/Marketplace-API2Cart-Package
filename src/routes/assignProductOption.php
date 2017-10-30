@@ -12,7 +12,7 @@ $app->post('/api/API2Cart/assignProductOption', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','productId'=>'productId','optionId'=>'optionId'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','optionId'=>'option_id'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['api_key','store_key','option_id','product_id']
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/assignProductOption', function ($request, $response) {
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {

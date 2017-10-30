@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/updateProductVariant', function ($request, $response) 
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','id'=>'id'];
-    $optionalParams = ['price'=>'price','description'=>'description','specialPrice'=>'specialPrice','shortDescription'=>'shortDescription','quantity'=>'quantity','metaTitle'=>'metaTitle','metaKeywords'=>'metaKeywords','metaDescription'=>'metaDescription','sku'=>'sku','visible'=>'visible','status'=>'status'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','id'=>'id'];
+    $optionalParams = ['price'=>'price','description'=>'description','specialPrice'=>'special_price','shortDescription'=>'short_description','quantity'=>'quantity','metaTitle'=>'meta_title','metaKeywords'=>'meta_keywords','metaDescription'=>'meta_description','sku'=>'sku','visible'=>'visible','status'=>'status'];
     $bodyParams = [
        'query' => ['id','status','visible','sku','meta_description','meta_keywords','meta_title','quantity','short_description','special_price','price','description','name','api_key','store_key']
     ];
@@ -35,7 +35,7 @@ $app->post('/api/API2Cart/updateProductVariant', function ($request, $response) 
         $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
-        if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
+        if(json_decode($responseBody, true)['return_code'] == 0 && in_array($resp->getStatusCode() , ['200', '201', '202', '203', '204'])) {
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
             if(empty($result['contextWrites']['to'])) {
