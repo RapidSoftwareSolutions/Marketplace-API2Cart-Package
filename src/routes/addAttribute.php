@@ -1,10 +1,10 @@
 <?php
 
-$app->post('/api/API2Cart/listCarts', function ($request, $response) {
+$app->post('/api/API2Cart/addAttribute', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','type','name']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,10 +12,10 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey'];
-    $optionalParams = ['params'=>'params','exclude'=>'exclude','requestFromDate'=>'requestFromDate','requestToDate'=>'requestToDate'];
+    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','type'=>'type','name'=>'name'];
+    $optionalParams = ['storeId'=>'storeId','langId'=>'langId','visible'=>'visible','required'=>'required','position'=>'position','isGlobal'=>'isGlobal','isSearchable'=>'isSearchable','isFilterable'=>'isFilterable','isComparable'=>'isComparable','isHtmlAllowedOnFront'=>'isHtmlAllowedOnFront','isFilterableInSearch'=>'isFilterableInSearch','isConfigurable'=>'isConfigurable','isVisibleInAdvancedSearch'=>'isVisibleInAdvancedSearch','isUsedForPromoRules'=>'isUsedForPromoRules','usedInProductListing'=>'usedInProductListing','usedForSortBy'=>'usedForSortBy','applyTo'=>'applyTo'];
     $bodyParams = [
-       'query' => ['request_to_date','request_from_date','exclude','params','api_key']
+       'query' => ['apply_to','used_for_sort_by','used_in_product_listing','is_used_for_promo_rules','is_visible_in_advanced_search','is_configurable','is_filterable_in_search','is_html_allowed_on_front','is_comparable','is_filterable','is_searchable','is_global','position','required','visible','lang_id','name','type','store_id','api_key','store_key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
@@ -23,7 +23,7 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "https://api.api2cart.com/v1.0/account.cart.list.json";
+    $query_str = "https://api.api2cart.com/v1.0/attribute.add.json";
 
     
 
@@ -32,7 +32,7 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
      
 
     try {
-        $resp = $client->get($query_str, $requestParams);
+        $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {

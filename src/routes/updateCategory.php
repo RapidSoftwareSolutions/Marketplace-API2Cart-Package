@@ -1,10 +1,10 @@
 <?php
 
-$app->post('/api/API2Cart/listCarts', function ($request, $response) {
+$app->post('/api/API2Cart/updateCategory', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','categoryId','description']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,10 +12,10 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey'];
-    $optionalParams = ['params'=>'params','exclude'=>'exclude','requestFromDate'=>'requestFromDate','requestToDate'=>'requestToDate'];
+    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey','categoryId'=>'categoryId','description'=>'description'];
+    $optionalParams = ['name'=>'name','storesIds'=>'storesIds','parentId'=>'parentId','avail'=>'avail','sortOrder'=>'sortOrder','createdTime'=>'createdTime','modifiedTime'=>'modifiedTime','metaTitle'=>'metaTitle','metaKeywords'=>'metaKeywords','metaDescription'=>'metaDescription','seoUrl'=>'seoUrl'];
     $bodyParams = [
-       'query' => ['request_to_date','request_from_date','exclude','params','api_key']
+       'query' => ['seo_url','meta_description','meta_keywords','meta_title','description','modified_time','created_time','sort_order','avail','parent_id','stores_ids','id','name','api_key','store_key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
@@ -23,7 +23,7 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "https://api.api2cart.com/v1.0/account.cart.list.json";
+    $query_str = "https://api.api2cart.com/v1.0/category.update.json";
 
     
 
@@ -32,7 +32,7 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
      
 
     try {
-        $resp = $client->get($query_str, $requestParams);
+        $resp = $client->post($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {

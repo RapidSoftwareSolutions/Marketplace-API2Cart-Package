@@ -1,10 +1,10 @@
 <?php
 
-$app->post('/api/API2Cart/listCarts', function ($request, $response) {
+$app->post('/api/API2Cart/listOrderStatuses', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,10 +12,10 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey'];
-    $optionalParams = ['params'=>'params','exclude'=>'exclude','requestFromDate'=>'requestFromDate','requestToDate'=>'requestToDate'];
+    $requiredParams = ['apiKey'=>'apiKey','storeKey'=>'storeKey'];
+    $optionalParams = [];
     $bodyParams = [
-       'query' => ['request_to_date','request_from_date','exclude','params','api_key']
+       'query' => ['api_key','store_key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
@@ -23,7 +23,7 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "https://api.api2cart.com/v1.0/account.cart.list.json";
+    $query_str = "https://api.api2cart.com/v1.0/order.status.list.json";
 
     
 

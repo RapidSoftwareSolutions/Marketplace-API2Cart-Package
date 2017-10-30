@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/API2Cart/listCarts', function ($request, $response) {
+$app->post('/api/API2Cart/listFailedWebhooks', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
@@ -13,9 +13,9 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
     }
 
     $requiredParams = ['apiKey'=>'apiKey'];
-    $optionalParams = ['params'=>'params','exclude'=>'exclude','requestFromDate'=>'requestFromDate','requestToDate'=>'requestToDate'];
+    $optionalParams = ['start'=>'start','count'=>'count','webhookIds'=>'webhookIds'];
     $bodyParams = [
-       'query' => ['request_to_date','request_from_date','exclude','params','api_key']
+       'query' => ['api_key','start','count']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
@@ -23,7 +23,7 @@ $app->post('/api/API2Cart/listCarts', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "https://api.api2cart.com/v1.0/account.cart.list.json";
+    $query_str = "https://api.api2cart.com/v1.0/account.failed_webhooks.json";
 
     
 
