@@ -3567,6 +3567,15 @@
                     "vendorSchema": {
                         "name": "store_id"
                     }
+                },
+                {
+                    "name": "imageName",
+                    "type": "String",
+                    "info": "Defines image's name",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "image_name"
+                    }
                 }
             ],
             "vendorRequest": {
@@ -3580,7 +3589,8 @@
                             "store_id",
                             "api_key",
                             "store_key",
-                            "product_id"
+                            "product_id",
+                            "image_name"
                         ]
                     }
                 ]

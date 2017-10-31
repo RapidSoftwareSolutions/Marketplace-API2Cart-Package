@@ -4,7 +4,7 @@ $app->post('/api/API2Cart/deleteProductImage', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','productId','imageId']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','productId','imageId', 'imageName']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,10 +12,10 @@ $app->post('/api/API2Cart/deleteProductImage', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','imageId'=>'id'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','imageId'=>'id','imageName'=>'image_name'];
     $optionalParams = ['storeID'=>'store_id'];
     $bodyParams = [
-       'query' => ['id','store_id','api_key','store_key','product_id']
+       'query' => ['id','store_id','api_key','store_key','product_id', 'image_name']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

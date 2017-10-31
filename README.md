@@ -465,6 +465,8 @@ Delete image of the product
 | productId| String     | ID of the product
 | imageId  | String     | ID of the image
 | storeID  | String     | Store id
+| imageName| String     | Defines image's name
+
 
 ## API2Cart.addProductOption
 Add product option from store
