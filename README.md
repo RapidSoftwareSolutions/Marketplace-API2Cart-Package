@@ -655,14 +655,7 @@ Update product option item from option
 | price        | String     | Defines new product option price
 | quantity     | String     | Defines new products' options quantity
 
-## API2Cart.deleteProduct
-Delete product
 
-| Field   | Type       | Description
-|---------|------------|----------
-| apiKey  | credentials| Your API key
-| storeKey| String     | API2Cart store key
-| id      | String     | Id of the product
 
 ## API2Cart.getProductVariantInfo
 Get variant info

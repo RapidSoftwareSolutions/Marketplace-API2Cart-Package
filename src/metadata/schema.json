@@ -5071,63 +5071,7 @@
                 }
             ]
         },
-        {
-            "name": "deleteProduct",
-            "description": "Delete product",
-            "args": [
-                {
-                    "name": "apiKey",
-                    "type": "credentials",
-                    "info": "Your API key",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "api_key"
-                    }
-                },
-                {
-                    "name": "storeKey",
-                    "type": "String",
-                    "info": "API2Cart store key",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "store_key"
-                    }
-                },
-                {
-                    "name": "id",
-                    "type": "String",
-                    "info": "Id of the product",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "id"
-                    }
-                }
-            ],
-            "vendorRequest": {
-                "url": "https:\/\/api.api2cart.com\/v1.0\/product.delete.json",
-                "method": "delete",
-                "requestParameters": [
-                    {
-                        "type": "query",
-                        "parameters": [
-                            "id",
-                            "api_key",
-                            "store_key"
-                        ]
-                    }
-                ]
-            },
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
-                {
-                    "name": "success",
-                    "info": "Success"
-                }
-            ]
-        },
+
         {
             "name": "getProductVariantInfo",
             "description": "Get variant info",
