@@ -4092,7 +4092,7 @@
                 },
                 {
                     "name": "taxClassId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Defines variants's tax class id",
                     "required": false,
                     "vendorSchema": {
@@ -9358,7 +9358,7 @@
                 },
                 {
                     "name": "groupId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Customer group Id",
                     "required": false,
                     "vendorSchema": {
@@ -9515,7 +9515,7 @@
                 },
                 {
                     "name": "groupId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Customer group Id",
                     "required": false,
                     "vendorSchema": {
@@ -10612,7 +10612,7 @@
                 },
                 {
                     "name": "taxClassId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Retrieves taxes specified by class id",
                     "required": true,
                     "vendorSchema": {
