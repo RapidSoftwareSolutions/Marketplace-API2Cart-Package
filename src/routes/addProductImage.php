@@ -4,7 +4,7 @@ $app->post('/api/API2Cart/addProductImage', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','productId','type','url']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','productId','type','url', 'imageName']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addProductImage', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','type'=>'type','url'=>'url'];
-    $optionalParams = ['imageName'=>'image_name','label'=>'label','mime'=>'mime','position'=>'position','image'=>'content'];
+    $requiredParams = ['imageName'=>'image_name','apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','type'=>'type','url'=>'url'];
+    $optionalParams = ['label'=>'label','mime'=>'mime','position'=>'position','image'=>'content'];
     $bodyParams = [
        'query' => ['content','position','mime','label','url','type','image_name','api_key','store_key','product_id']
     ];

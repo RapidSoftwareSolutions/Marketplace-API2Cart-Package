@@ -751,53 +751,7 @@
                 }
             ]
         },
-        {
-            "name": "downloadBridge",
-            "description": "Download bridge for store",
-            "args": [
-                {
-                    "name": "apiKey",
-                    "type": "credentials",
-                    "info": "Your API key",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "api_key"
-                    }
-                },
-                {
-                    "name": "storeKey",
-                    "type": "String",
-                    "info": "API2Cart store key",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "store_key"
-                    }
-                }
-            ],
-            "vendorRequest": {
-                "url": "https:\/\/api.api2cart.com\/v1.0\/bridge.download.json",
-                "method": "get",
-                "requestParameters": [
-                    {
-                        "type": "query",
-                        "parameters": [
-                            "api_key",
-                            "store_key"
-                        ]
-                    }
-                ]
-            },
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
-                {
-                    "name": "success",
-                    "info": "Success"
-                }
-            ]
-        },
+
         {
             "name": "listCartConfigs",
             "description": "Get list of cart configs",
@@ -867,7 +821,7 @@
         },
         {
             "name": "getCartInfo",
-            "description": "Get list of cart configs",
+            "description": "Get info about cart",
             "args": [
                 {
                     "name": "apiKey",
@@ -1451,7 +1405,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -1550,7 +1504,7 @@
                     "name": "ownerEmail",
                     "type": "String",
                     "info": "Gift card owner email",
-                    "required": true,
+                    "required": false,
                     "vendorSchema": {
                         "name": "owner_email"
                     }
@@ -2017,7 +1971,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -2106,7 +2060,7 @@
         },
         {
             "name": "countProducts",
-            "description": "Get list of products from your store. Returns 4 products by default.",
+            "description": "Get count of products from your store.",
             "args": [
                 {
                     "name": "apiKey",
@@ -2208,7 +2162,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -2309,7 +2263,7 @@
                     "name": "productId",
                     "type": "String",
                     "info": "Product Id",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "id"
                     }
@@ -2325,7 +2279,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -2404,7 +2358,7 @@
                     "name": "findValue",
                     "type": "String",
                     "info": "Entity search that is specified by some value",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "find_value"
                     }
@@ -2479,7 +2433,7 @@
         },
         {
             "name": "listProductFields",
-            "description": "Search product in store catalog. ",
+            "description": "This method returns all available fields for product in the store. ",
             "args": [
                 {
                     "name": "apiKey",
@@ -2755,7 +2709,7 @@
                 },
                 {
                     "name": "taxClassId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Defines product's tax class id",
                     "required": false,
                     "vendorSchema": {
@@ -2838,7 +2792,7 @@
                     "name": "attributeSetName",
                     "type": "String",
                     "info": "Defines product\u2019s attribute set name in Magento",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "attribute_set_name"
                     }
@@ -3294,7 +3248,7 @@
                     "name": "imageName",
                     "type": "String",
                     "info": "Defines image's name",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "image_name"
                     }
@@ -3436,7 +3390,7 @@
                     "name": "imageName",
                     "type": "String",
                     "info": "Defines image's name",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "image_name"
                     }
@@ -3918,7 +3872,7 @@
                 },
                 {
                     "name": "optionValueId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Defines value id that has to be assigned",
                     "required": true,
                     "vendorSchema": {
@@ -5018,7 +4972,7 @@
                 },
                 {
                     "name": "optionValueId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Defines value id that has to be assigned",
                     "required": true,
                     "vendorSchema": {
@@ -5458,7 +5412,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -6009,7 +5963,7 @@
                 },
                 {
                     "name": "valueId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Define attribute value id",
                     "required": false,
                     "vendorSchema": {
@@ -6018,7 +5972,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -6100,7 +6054,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -6218,7 +6172,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -6336,7 +6290,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -6414,7 +6368,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -6504,7 +6458,7 @@
                     "name": "findValue",
                     "type": "String",
                     "info": "Entity search that is specified by some value",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "find_value"
                     }
@@ -7032,7 +6986,7 @@
                 {
                     "name": "productId",
                     "type": "String",
-                    "info": "Id of the category",
+                    "info": "Id of the product",
                     "required": true,
                     "vendorSchema": {
                         "name": "product_id"
@@ -7099,7 +7053,7 @@
                 {
                     "name": "productId",
                     "type": "String",
-                    "info": "Id of the category",
+                    "info": "Id of the product",
                     "required": true,
                     "vendorSchema": {
                         "name": "product_id"
@@ -7506,7 +7460,7 @@
                 },
                 {
                     "name": "createdTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -7515,7 +7469,7 @@
                 },
                 {
                     "name": "createdFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -7524,7 +7478,7 @@
                 },
                 {
                     "name": "modifiedTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -7533,7 +7487,7 @@
                 },
                 {
                     "name": "modifiedFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -7649,7 +7603,7 @@
                 },
                 {
                     "name": "createdTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -7658,7 +7612,7 @@
                 },
                 {
                     "name": "createdFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -7667,7 +7621,7 @@
                 },
                 {
                     "name": "modifiedTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -7676,7 +7630,7 @@
                 },
                 {
                     "name": "modifiedFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -7919,7 +7873,7 @@
                 },
                 {
                     "name": "createdTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -7928,7 +7882,7 @@
                 },
                 {
                     "name": "createdFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -7937,7 +7891,7 @@
                 },
                 {
                     "name": "modifiedTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -7946,7 +7900,7 @@
                 },
                 {
                     "name": "modifiedFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -9359,7 +9313,7 @@
                 },
                 {
                     "name": "createdTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -9368,7 +9322,7 @@
                 },
                 {
                     "name": "createdFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -9377,7 +9331,7 @@
                 },
                 {
                     "name": "modifiedTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -9386,7 +9340,7 @@
                 },
                 {
                     "name": "modifiedFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -9516,7 +9470,7 @@
                 },
                 {
                     "name": "createdTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -9525,7 +9479,7 @@
                 },
                 {
                     "name": "createdFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their creation date",
                     "required": false,
                     "vendorSchema": {
@@ -9534,7 +9488,7 @@
                 },
                 {
                     "name": "modifiedTo",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities to their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -9543,7 +9497,7 @@
                 },
                 {
                     "name": "modifiedFrom",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Retrieve entities from their modification date",
                     "required": false,
                     "vendorSchema": {
@@ -9722,7 +9676,7 @@
                     "name": "findValue",
                     "type": "String",
                     "info": "Entity search that is specified by some value",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "find_value"
                     }
@@ -11012,7 +10966,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -11145,7 +11099,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -11266,7 +11220,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {
@@ -11495,7 +11449,7 @@
                 },
                 {
                     "name": "langId",
-                    "type": "String",
+                    "type": "Number",
                     "info": "Language id",
                     "required": false,
                     "vendorSchema": {

@@ -4,7 +4,7 @@ $app->post('/api/API2Cart/addCartGiftcard', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','amount','ownerEmail']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','amount']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/addCartGiftcard', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','amount'=>'amount','ownerEmail'=>'owner_email'];
-    $optionalParams = ['code'=>'code'];
+    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','amount'=>'amount'];
+    $optionalParams = ['code'=>'code','ownerEmail'=>'owner_email'];
     $bodyParams = [
        'query' => ['owner_email','code','amount','api_key','store_key']
     ];

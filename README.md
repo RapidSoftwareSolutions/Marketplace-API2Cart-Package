@@ -116,14 +116,6 @@ Get list of cart methods
 | apiKey  | credentials| Your API key
 | storeKey| String     | API2Cart store key
 
-## API2Cart.downloadBridge
-Download bridge for store
-
-| Field   | Type       | Description
-|---------|------------|----------
-| apiKey  | credentials| Your API key
-| storeKey| String     | API2Cart store key
-
 ## API2Cart.listCartConfigs
 Get list of cart configs
 
@@ -135,7 +127,7 @@ Get list of cart configs
 | exclude | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 ## API2Cart.getCartInfo
-Get list of cart configs
+Get info about cart
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -217,7 +209,7 @@ Get cart coupons list
 | avail        | Select     | Defines category's visibility status
 | start        | Number     | This parameter sets the number from which you want to get entities
 | count        | Number     | This parameter sets the entity amount that has to be retrieved
-| langId       | String     | Language id
+| langId       | Number     | Language id
 | params       | String     | Set this parameter in order to choose which entity fields you want to retrieve
 | exclude      | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
@@ -290,13 +282,13 @@ Get list of products from your store. Returns 4 products by default.
 | availView           | Select     | Specifies the set of visible/invisible products
 | availSale           | Select     | Specifies the set of available/not available products for sale
 | storeId             | String     | Store Id
-| langId              | String     | Language id
+| langId              | Number     | Language id
 | productIds          | List       | Retrieves products specified by product ids
 | productVariantParams| List       | Set this parameter in product to choose which entity fields product variants you want to retrieve
 | sinceId             | Number     | Retrieve products starting from the specified product id
 
 ## API2Cart.countProducts
-Get list of products from your store. Returns 4 products by default.
+Get count of products from your store.
 
 | Field       | Type       | Description
 |-------------|------------|----------
@@ -310,7 +302,7 @@ Get list of products from your store. Returns 4 products by default.
 | availView   | Select     | Specifies the set of visible/invisible products
 | availSale   | Select     | Specifies the set of available/not available products for sale
 | storeId     | String     | Store Id
-| langId      | String     | Language id
+| langId      | Number     | Language id
 | productIds  | List       | Retrieves products specified by product ids
 
 ## API2Cart.getProductInfo
@@ -324,7 +316,7 @@ Get product info
 | exclude             | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 | productId           | String     | Product Id
 | storeId             | String     | Store Id
-| langId              | String     | Language id
+| langId              | Number     | Language id
 | productVariantParams| List       | Set this parameter in product to choose which entity fields product variants you want to retrieve
 
 ## API2Cart.findProduct
@@ -340,7 +332,7 @@ Search product in store catalog.
 | findWhat   | String     | Parameter's value specifies the entity that has to be found
 
 ## API2Cart.listProductFields
-Search product in store catalog. 
+This method returns all available fields for product in the store.  
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -375,7 +367,7 @@ Add product to store catalog.
 | createdAt         | DatePicker | Defines product's creation date
 | manufacturer      | String     | Defines product's manufacturer
 | categoriesIds     | List       | Defines product categories id
-| taxClassId        | String     | Defines product's tax class id
+| taxClassId        | Number     | Defines product's tax class id
 | type              | String     | Defines product's type
 | metaTitle         | String     | Defines product's meta title
 | metaKeywords      | String     | Defines product's meta keywords
@@ -436,7 +428,7 @@ Add image to product
 | type     | List       | Defines image's types that are specified by list
 | url      | String     | Defines URL of the image that has to be added
 | label    | String     | Defines alternative text that has to be attached to the picture
-| mime     | String     | Mime type of the image
+| mime     | String     | Mime type of the image (http://en.wikipedia.org/wiki/Internet_media_type)
 | position | Number     | Defines image’s position in the list
 | image    | File       | Image
 
@@ -513,7 +505,7 @@ Assign product option item from option.
 | apiKey         | credentials| Your API key
 | storeKey       | String     | API2Cart store key
 | productOptionId| String     | Defines product's option id where the value has to be assigned
-| optionValueId  | String     | Defines value id that has to be assigned
+| optionValueId  | Number     | Defines value id that has to be assigned
 
 ## API2Cart.addProductVariant
 Add variant to product
@@ -651,7 +643,7 @@ Update product option item from option
 |--------------|------------|----------
 | apiKey       | credentials| Your API key
 | storeKey     | String     | API2Cart store key
-| optionValueId| String     | Defines value id that has to be assigned
+| optionValueId| Number     | Defines value id that has to be assigned
 | price        | String     | Defines new product option price
 | quantity     | String     | Defines new products' options quantity
 
@@ -710,7 +702,7 @@ Get list of attributes
 | count           | Number     | This parameter sets the entity amount that has to be retrieved
 | sortBy          | String     | Set field to sort by
 | sortDirection   | String     | Set sorting direction
-| langId          | String     | Language id
+| langId          | Number     | Language id
 | storeId         | String     | Store Id
 | attributeId     | String     | Retrieves info for specified attributeId
 | attributeGroupId| String     | Filter by attributeGroupId
@@ -788,8 +780,8 @@ Set attribute value to product.
 | attributeGroupId| String     | Filter by attributeGroupId
 | attributeName   | String     | Define attribute name
 | value           | String     | Define attribute value
-| valueId         | String     | Define attribute value id
-| langId          | String     | Language id
+| valueId         | Number     | Define attribute value id
+| langId          | Number     | Language id
 | storeId         | String     | Store Id
 
 ## API2Cart.listProductChildItems
@@ -800,7 +792,7 @@ Get child items list of specific product
 | apiKey   | credentials| Your API key
 | storeKey | String     | API2Cart store key
 | productId| String     | Id of the product
-| langId   | String     | Language id
+| langId   | Number     | Language id
 | storeId  | String     | Store Id
 | start    | Number     | This parameter sets the number from which you want to get entities
 | count    | Number     | This parameter sets the entity amount that has to be retrieved
@@ -815,7 +807,7 @@ Get list of categories from store. Returns 4 categories by default.
 | apiKey  | credentials| Your API key
 | storeKey| String     | API2Cart store key
 | parentId| String     | Retrieves categories specified by parent id
-| langId  | String     | Language id
+| langId  | Number     | Language id
 | storeId | String     | Store Id
 | start   | Number     | This parameter sets the number from which you want to get entities
 | count   | Number     | This parameter sets the entity amount that has to be retrieved
@@ -830,7 +822,7 @@ Count categories in store
 | apiKey   | credentials| Your API key
 | storeKey | String     | API2Cart store key
 | productId| String     | Retrieves categories specified by parent id
-| langId   | String     | Language id
+| langId   | Number     | Language id
 | storeId  | String     | Store Id
 
 ## API2Cart.getSingleCategory
@@ -841,7 +833,7 @@ Get category info about category ID
 | apiKey    | credentials| Your API key
 | storeKey  | String     | API2Cart store key
 | categoryId| String     | Id of the category
-| langId    | String     | Language id
+| langId    | Number     | Language id
 | storeId   | String     | Store Id
 | params    | String     | Set this parameter in order to choose which entity fields you want to retrieve
 | exclude   | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
@@ -902,6 +894,7 @@ Update existing category in store
 ## API2Cart.deleteCategory
 Delete existing category in store
 
+
 | Field     | Type       | Description
 |-----------|------------|----------
 | apiKey    | credentials| Your API key
@@ -915,7 +908,7 @@ Assign category to product
 |-----------|------------|----------
 | apiKey    | credentials| Your API key
 | storeKey  | String     | API2Cart store key
-| categoryId| String     | ID of the category
+| productId| String     | ID of the product
 | categoryId| String     | Id of the category
 
 ## API2Cart.unassignCategory
@@ -925,7 +918,7 @@ Unassign category to product
 |-----------|------------|----------
 | apiKey    | credentials| Your API key
 | storeKey  | String     | API2Cart store key
-| categoryId| String     | ID of the category
+| productId| String     | ID of the product
 | categoryId| String     | Id of the category
 
 ## API2Cart.addImageToCategory
@@ -939,7 +932,7 @@ Add image to category
 | imageName | String     | Defines image's name
 | url       | String     | Defines URL of the image that has to be added
 | label     | String     | Defines alternative text that has to be attached to the picture
-| mime      | String     | Mime type of image 
+| mime      | String     | Mime type of image (http://en.wikipedia.org/wiki/Internet_media_type)
 | type      | List       | Defines image's types that are specified by list
 | position  | Number     | Defines image’s position in the list
 | storeId   | String     | Store Id
@@ -1281,7 +1274,6 @@ Add customer into store.
 | addressBookCompany    | String     | Specifies customer's address book company
 | addressBookFax        | String     | Specifies customer's address book fax
 | addressBookPhone      | String     | Specifies customer's address book phone
-| addressBookPhone      | String     | Specifies customer's address book phone
 | addressBookWebsite    | String     | Specifies customer's address website
 | addressBookAddress1   | String     | Specifies customer's first address in the address book
 | addressBookAddress2   | String     | Specifies customer's second address in the address book
@@ -1322,7 +1314,6 @@ Update existing customer in store.
 | addressBookLastName   | String     | Specifies customer's address book last name
 | addressBookCompany    | String     | Specifies customer's address book company
 | addressBookFax        | String     | Specifies customer's address book fax
-| addressBookPhone      | String     | Specifies customer's address book phone
 | addressBookPhone      | String     | Specifies customer's address book phone
 | addressBookWebsite    | String     | Specifies customer's address website
 | addressBookAddress1   | String     | Specifies customer's first address in the address book
@@ -1399,7 +1390,7 @@ Get attributes list
 | type        | Number     | Defines attribute's type
 | attributeIds| List       | List of attribute ids
 | storeId     | String     | Store Id
-| langId      | String     | Language id
+| langId      | Number     | Language id
 | params      | String     | Set this parameter in order to choose which entity fields you want to retrieve
 | exclude     | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 | visible     | Select     | Filter items by visibility status
@@ -1414,7 +1405,7 @@ Get attribute info
 | apiKey     | credentials| Your API key
 | storeKey   | String     | API2Cart store key
 | attributeId| String     | Id of the attribute
-| langId     | String     | Language id
+| langId     | Number     | Language id
 | storeId    | String     | Store Id
 | params     | String     | Set this parameter in order to choose which entity fields you want to retrieve
 | exclude    | String     | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
@@ -1429,7 +1420,7 @@ Get attributes count
 | type        | Number     | Defines attribute's type
 | attributeIds| List       | List of attribute ids
 | storeId     | String     | Store Id
-| langId      | String     | Language id
+| langId      | Number     | Language id
 | visible     | Select     | Filter items by visibility status
 | required    | Select     | Defines if the option is required
 
@@ -1461,7 +1452,7 @@ Add new attribute
 | storeId                  | String     | Store Id
 | type                     | String     | Attribute type
 | name                     | String     | Attribute name
-| langId                   | String     | Language id
+| langId                   | Number     | Language id
 | visible                  | Select     | Filter items by visibility status
 | required                 | Select     | Defines if the option is required
 | position                 | Number     | Defines attribute position in the list

@@ -4,7 +4,7 @@ $app->post('/api/API2Cart/findCategory', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey', 'findValue']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/findCategory', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key'];
-    $optionalParams = ['findValue'=>'find_value','findWhere'=>'find_where','find_params'=>'find_params'];
+    $requiredParams = ['findValue'=>'find_value','apiKey'=>'api_key','storeKey'=>'store_key'];
+    $optionalParams = ['findWhere'=>'find_where','find_params'=>'find_params'];
     $bodyParams = [
        'query' => ['find_params','find_where','find_value','api_key','store_key']
     ];

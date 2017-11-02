@@ -4,7 +4,7 @@ $app->post('/api/API2Cart/updateProductImage', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','productId','imageId','type']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','storeKey','productId','imageId','type', 'imageName']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,8 +12,8 @@ $app->post('/api/API2Cart/updateProductImage', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','imageId'=>'id','type'=>'type'];
-    $optionalParams = ['imageName'=>'image_name','label'=>'label','storeID'=>'store_id','hidden'=>'hidden'];
+    $requiredParams = ['imageName'=>'image_name','apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','imageId'=>'id','type'=>'type'];
+    $optionalParams = ['label'=>'label','storeID'=>'store_id','hidden'=>'hidden'];
     $bodyParams = [
        'query' => ['hidden','id','store_id','label','type','image_name','api_key','store_key','product_id']
     ];
