@@ -600,16 +600,6 @@ Delete variant to product
 | storeKey| String     | API2Cart store key
 | id      | String     | Id of the variant
 
-## API2Cart.addProductTax
-Add tax class and tax rate to store and assign to product
-
-| Field    | Type       | Description
-|----------|------------|----------
-| apiKey   | credentials| Your API key
-| storeKey | String     | API2Cart store key
-| productId| String     | Id of the product
-| name     | String     | Defines tax class name where tax has to be added
-| taxRates | String     | Defines tax rates of specified tax classes
 
 ## API2Cart.addProductManufacturer
 Add manufacturer to store and assign to product
@@ -1273,6 +1263,7 @@ Add customer into store.
 | addressBookLastName   | String     | Specifies customer's address book last name
 | addressBookCompany    | String     | Specifies customer's address book company
 | addressBookFax        | String     | Specifies customer's address book fax
+| addressBookPhone      | String     | Specifies customer's address book phone
 | addressBookPhone      | String     | Specifies customer's address book phone
 | addressBookWebsite    | String     | Specifies customer's address website
 | addressBookAddress1   | String     | Specifies customer's first address in the address book
