@@ -15,7 +15,7 @@ $app->post('/api/API2Cart/addProductTax', function ($request, $response) {
     $requiredParams = ['apiKey'=>'api_key','storeKey'=>'store_key','productId'=>'product_id','name'=>'name','taxRates'=>'tax_rates'];
     $optionalParams = [];
     $bodyParams = [
-       'query' => ['tax_rates','name','product_id','api_key','store_key']
+       'json' => ['tax_rates','name','product_id','api_key','store_key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

@@ -4721,7 +4721,12 @@
                 },
                 {
                     "name": "taxRates",
-                    "type": "String",
+                    "type": "List",
+                    "structure":{
+                        "name": "taxRate",
+                        "type": "String",
+                        "info": "Single tax rate"
+                    },
                     "info": "Defines tax rates of specified tax classes",
                     "required": true,
                     "vendorSchema": {
@@ -4734,7 +4739,7 @@
                 "method": "post",
                 "requestParameters": [
                     {
-                        "type": "query",
+                        "type": "json",
                         "parameters": [
                             "tax_rates",
                             "name",
